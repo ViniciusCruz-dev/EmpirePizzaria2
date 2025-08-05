@@ -1,0 +1,1190 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empire Pizzaria - A Realeza das Pizzas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            height: 60px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a::before {
+            content: '♔';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            color: #ffd700;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover::before {
+            transform: translateX(-50%) scale(1);
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            max-width: 430px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+            50% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: #ffd700;
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Ornamental Dividers */
+        .ornament {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 2rem;
+            color: #ffd700;
+            opacity: 0.7;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '♔';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #ffd700;
+            animation: crownFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes crownFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+        }
+
+        .about-text::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 4rem;
+            color: #ffd700;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.1), transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: rotate 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .menu-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #333, #444);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-item h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-item h3::after {
+            content: '♔';
+            margin-left: 10px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover h3::after {
+            opacity: 1;
+        }
+
+        .menu-item p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: linear-gradient(135deg, #333, #444);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), transparent, rgba(255, 215, 0, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateX(10px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #ffd700;
+            width: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .contact-item h3 {
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover::before {
+            opacity: 1;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .map-placeholder {
+            background: #333;
+            border-radius: 15px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 13px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #111, #1a1a1a);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '♔ ♔ ♔';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #111;
+            padding: 0 20px;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .particle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <img src="empire.webp" alt="Empire Pizzaria" class="logo">
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#menu">Cardápio</a></li>
+                    <li><a href="#gallery">Galeria</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="empire.webp" alt="Logo da pizzaria" class="hero-logo">
+            <h1>Empire Pizzaria</h1>
+            <p>Onde o sabor é reino ABSOLUTO!</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5512982704906?text=Olá! Vim pelo site e quero fazer meu pedido!" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Fazer Pedido
+                </a>
+                <a href="https://empirepizza.saipos.com/home?fbclid=PAQ0xDSwL-LtNleHRuA2FlbQIxMAABp2O9aFJi0wMctG4QScew7GZP1Tp_RldtQpNA-1XJlY-qFlhYED4UAzHWyYrS_aem_wRkrIoJaxlZv3ZheqsDICA" class="btn btn-secondary">
+                    <i class="fas fa-utensils"></i> Ver Cardápio
+                </a>
+            </div><br><br>
+            <p>Trabalhamos com entregas e retiradas!</p>
+        </div>
+    </section>
+
+    <!-- Ornamental Divider -->
+    <div class="ornament">♔ ◆ ♔ ◆ ♔</div>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+        <h2 class="section-title">Sobre a Empire</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Seja bem-vindo à Empire Pizzaria, onde cada pizza é feita com ingredientes selecionados e muito carinho. Nossa história é recente, mas já unimos receitas autênticas com um toque de inovação, criando sabores únicos que conquistam os paladares mais exigentes.</p>
+                <br>
+                <p>Trabalhamos apenas com os melhores ingredientes: queijos deliciosos, um molho exclusivo e uma massa secreta de fermentação lenta que leva 24 horas para atingir o ponto ideal. O resultado é uma pizza leve, saborosa e fácil de digerir, realçada com azeites de altíssima qualidade. Cada pizza é uma verdadeira obra de arte que traduz nossa paixão por uma experiência perfeita!</p>
+                <br>
+                <p>Descubra por que somos reconhecidos como a realeza das pizzas na região!</p>
+            </div>
+            <div class="about-image">
+                <p>Verificar foto com Vitória<br>(imagem)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ornamental Divider -->
+    <div class="ornament">♔ ◆ ♔ ◆ ♔</div>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section fade-in">
+        <h2 class="section-title">Nosso Cardápio</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Ragu Empire</p>
+                </div>
+                <h3>Pizza Ragu Empire</h3>
+                <p>Molho de tomate especial, ragu de linguiça temperado, mussarela, catupiry, alho frito e finalizada com azeitonas e orégano</p>
+                <div class="price">R$ --,--</div>
+            </div>
+                        <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Marguerita</p>
+                </div>
+                <h3>Pizza Marguerita</h3>
+                <p>Molho de tomate especial, mussarela, tomates, manjericão fresco e finalizada com azeitonas e orégano</p>
+                <div class="price">R$ --,--</div>
+            </div>
+                        <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Lombo</p>
+                </div>
+                <h3>Pizza Lombo</h3>
+                <p>Molho de tomate especial, mussarela, lombo, catupiry, cebola e finalizada com uma deliciosa geleia de pimenta, azeitonas e orégano</p>
+                <div class="price">R$ --,--</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Quatro Queijos</p>
+                </div>
+                <h3>Pizza Quatro Queijos</h3>
+                <p>Molho de tomate especial, mussarela, gorgonzola, parmesão, catupiry e finalizada com azeitoas e orégano</p>
+                <div class="price">R$ --,--</div>
+            </div>
+                <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Calamussa</p>
+                </div>
+                <h3>Pizza Calamussa</h3>
+                <p>Molho de tomate especial, calabresa, mussarela, cebola e finalizada com azeitonas e orégano</p>
+                <div class="price">R$ --,--</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Pesto</p>
+                </div>
+                <h3>Pizza Pesto Empire</h3>
+                <p>Molho de tomate especial, mussarela, pimenta biquinho, molho pesto especial da casa e finalizada com azeitonas</p>
+                <div class="price">R$ --,--</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ornamental Divider -->
+    <div class="ornament">♔ ◆ ♔ ◆ ♔</div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section fade-in">
+        <h2 class="section-title">Galeria</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <p>Foto 1 - Pizza</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 2 - Pizza</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 3 - Pizza</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 4 - Pizza</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 5 - Clientes satisfeitos</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 6 - Clientes satisfeitos</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 7 - Clientes satisfeitos</p>
+            </div>
+            <div class="gallery-item">
+                <p>Foto 8 - Clientes satisfeitos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ornamental Divider -->
+    <div class="ornament">♔ ◆ ♔ ◆ ♔</div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+        <h2 class="section-title">Contato</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Endereço</h3>
+                        <p>Rua Virgem, 740<br>Jardim Satélite - São José dos Campos, SP<br>CEP: 12230-420</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>Telefone</h3>
+                        <p>(12) 98270-4906<br>WhatsApp disponível</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Horário de Funcionamento</h3>
+                        <p>Segunda, Quarta, Quinta e Domingo<br>18h às 23h10<br></p>
+                        <p>Sexta e Sábado<br>18h às 00h30<br>Terça: Fechado</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/empirepizzariasjc?igsh=d2hsd3E1bmV1a3cx" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send/?phone=5512982704906" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="map-placeholder">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.3937458442842!2d-45.887839924680016!3d-23.228754679029812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4a9536652da7%3A0x5d1028ba44d27599!2sR.%20V%C3%ADrgem%2C%20740%20-%20Jardim%20Sat%C3%A9lite%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012230-420!5e0!3m2!1spt-BR!2sbr!4v1754354903195!5m2!1spt-BR!2sbr" width="540" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Empire Pizzaria. Todos os direitos reservados.</p>
+        <p>Desenvolvido por <a href="https://www.instagram.com/viniciuss.csilva?igsh=Y3hmemdpenZwNWMy">Vinicius Cruz</a>, para a realeza das pizzas</p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth > 768 ? 50 : 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+                header.style.backdropFilter = 'blur(15px)';
+            }
+        });
+
+        // Enhanced fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced menu item hover effects
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+                this.style.boxShadow = '0 25px 50px rgba(255, 215, 0, 0.2)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-15px) scale(1)';
+                this.style.boxShadow = '0 20px 40px rgba(255, 215, 0, 0.1)';
+            });
+        });
+
+        // Enhanced gallery item effects
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 150);
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 300);
+            });
+
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 20px 40px rgba(255, 215, 0, 0.2)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Enhanced CTA button effects
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 35px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 15px rgba(255, 215, 0, 0.3)';
+            });
+        });
+
+        // Enhanced hero effects
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.scrollY;
+            const rate = scrolled * -0.5;
+            
+            if (scrolled > 100) {
+                hero.style.opacity = '0.95';
+                hero.style.transform = `translateY(${rate}px)`;
+            } else {
+                hero.style.opacity = '1';
+                hero.style.transform = 'translateY(0)';
+            }
+        });
+
+        // Add sparkle effect on button click
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = e.offsetX + 'px';
+                sparkle.style.top = e.offsetY + 'px';
+                sparkle.style.width = '10px';
+                sparkle.style.height = '10px';
+                sparkle.style.background = '#fff';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.animation = 'sparkle 0.6s ease-out forwards';
+                
+                this.style.position = 'relative';
+                this.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 600);
+            });
+        });
+
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle {
+                0% {
+                    transform: scale(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1.5) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Recreate particles on window resize
+        window.addEventListener('resize', () => {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            createParticles();
+        });
+    </script>
+</body>
