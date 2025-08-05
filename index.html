@@ -1205,6 +1205,9 @@
                 <a href="https://empirepizza.saipos.com/home?fbclid=PAQ0xDSwL-LtNleHRuA2FlbQIxMAABp2O9aFJi0wMctG4QScew7GZP1Tp_RldtQpNA-1XJlY-qFlhYED4UAzHWyYrS_aem_wRkrIoJaxlZv3ZheqsDICA" class="btn btn-secondary">
                     <i class="fas fa-utensils"></i> Ver Cardápio
                 </a>
+                <button onclick="showPopup()" class="btn btn-secondary">
+                    <i class="fas fa-crown"></i> Receber Promoções
+                </button>
             </div><br><br>
             <p>Trabalhamos com entregas e retiradas!</p>
         </div>
@@ -1433,6 +1436,14 @@
     </footer>
 
     <script>
+
+        // Adicione dentro da tag <script> existente
+function showPopup() {
+    const popup = document.getElementById('newsletter-popup');
+    popup.style.display = 'block';
+    sessionStorage.removeItem('popupShown'); // Permite que o popup apareça mesmo que já tenha sido fechado antes
+}
+
        document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const popup = document.getElementById('newsletter-popup');
