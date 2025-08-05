@@ -184,8 +184,8 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            padding-top: 120px;
-            padding-bottom: 60px;
+            padding-top: 100px;
+            padding-bottom: 30px;
             box-sizing: border-box;
         }
 
@@ -225,6 +225,11 @@
             z-index: 2;
         }
 
+        .hero-content p {
+    margin-top: 0.5rem;  /* Ajuste este valor para controlar o espaço */
+    margin-bottom: 0;
+}
+
         .hero h1 {
             font-family: 'Cinzel', serif;
             font-size: 4rem;
@@ -255,6 +260,7 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
 
         .btn {
@@ -317,15 +323,20 @@
         /* Ornamental Dividers */
         .ornament {
             text-align: center;
-            margin: 3rem 0;
+            margin: 1.5rem 0;
             font-size: 2rem;
             color: #ffd700;
             opacity: 0.7;
         }
 
+        .hero-content p:last-child {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem; /* Adicionado margin-bottom */
+}
+
         /* Sections */
         .section {
-            padding: 5rem 0;
+            padding: 2rem 0;
             max-width: 1200px;
             margin: 0 auto;
             padding-left: 2rem;
@@ -855,10 +866,7 @@
                 height: 50px;
             }
 
-            .ornament {
-                font-size: 1.5rem;
-                margin: 2rem 0;
-            }
+
 
             .particle {
                 display: none;
@@ -1208,7 +1216,7 @@
                 <button onclick="showPopup()" class="btn btn-secondary">
                     <i class="fas fa-crown"></i> Receber Promoções
                 </button>
-            </div><br><br>
+            </div>
             <p>Trabalhamos com entregas e retiradas!</p>
         </div>
     </section>
