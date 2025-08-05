@@ -1,9 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Empire Pizzaria - A Realeza das Pizzas</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -705,7 +708,17 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
+        /* Responsive - Mobile First Approach */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
@@ -713,51 +726,146 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background: rgba(0, 0, 0, 0.95);
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                justify-content: start;
+                justify-content: flex-start;
                 align-items: center;
                 padding-top: 2rem;
                 transition: left 0.3s ease;
+                z-index: 999;
             }
 
             .nav-menu.active {
                 left: 0;
             }
 
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
+
             .mobile-menu {
                 display: block;
+                z-index: 1001;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .hero-logo {
+                max-width: 300px;
+                margin-bottom: 1.5rem;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
+                margin-bottom: 1.5rem;
             }
 
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
             }
 
             .section-title {
                 font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-title::after {
+                top: -25px;
+                font-size: 1.2rem;
             }
 
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text {
+                padding: 1.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .menu-item:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .gallery-item {
+                height: 200px;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
 
             .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .contact-item {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .contact-item:hover {
+                transform: translateY(-5px);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .social-links a {
+                width: 50px;
+                height: 50px;
+            }
+
+            .ornament {
+                font-size: 1.5rem;
+                margin: 2rem 0;
             }
 
             .particle {
                 display: none;
+            }
+
+            /* Fix for mobile scrolling issues */
+            body {
+                -webkit-overflow-scrolling: touch;
             }
         }
 
@@ -766,17 +874,132 @@
                 padding: 0 1rem;
             }
 
-            .section {
-                padding-left: 1rem;
-                padding-right: 1rem;
+            .logo {
+                height: 50px;
+            }
+
+            .hero {
+                padding-top: 90px;
+            }
+
+            .hero-logo {
+                max-width: 250px;
             }
 
             .hero h1 {
                 font-size: 2rem;
+                line-height: 1.2;
             }
 
-            .menu-grid {
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-text {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .menu-item {
+                padding: 1rem;
+            }
+
+            .menu-item h3 {
+                font-size: 1.3rem;
+            }
+
+            .menu-item p {
+                font-size: 0.9rem;
+            }
+
+            .price {
+                font-size: 1.3rem;
+            }
+
+            .gallery-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-item {
+                height: 180px;
+            }
+
+            .btn {
+                max-width: 100%;
+                font-size: 0.9rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .contact-item {
+                padding: 0.8rem;
+            }
+
+            .contact-item i {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .social-links a {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .map-placeholder {
+                height: 250px;
+            }
+
+            .map-placeholder iframe {
+                height: 100%;
+            }
+
+            .footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .menu-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Landscape orientation fixes */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: 100vh;
+                padding-top: 80px;
+            }
+            
+            .hero-logo {
+                max-width: 200px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -857,40 +1080,7 @@
                 </div>
                 <h3>Pizza Ragu Empire</h3>
                 <p>Molho de tomate especial, ragu de linguiça temperado, mussarela, catupiry, alho frito e finalizada com azeitonas e orégano</p>
-                <div class="price">R$ --,--</div>
-            </div>
-                        <div class="menu-item">
-                <div class="menu-item-image">
-                    <p>Foto da Pizza Marguerita</p>
-                </div>
-                <h3>Pizza Marguerita</h3>
-                <p>Molho de tomate especial, mussarela, tomates, manjericão fresco e finalizada com azeitonas e orégano</p>
-                <div class="price">R$ --,--</div>
-            </div>
-                        <div class="menu-item">
-                <div class="menu-item-image">
-                    <p>Foto da Pizza Lombo</p>
-                </div>
-                <h3>Pizza Lombo</h3>
-                <p>Molho de tomate especial, mussarela, lombo, catupiry, cebola e finalizada com uma deliciosa geleia de pimenta, azeitonas e orégano</p>
-                <div class="price">R$ --,--</div>
-            </div>
-            
-            <div class="menu-item">
-                <div class="menu-item-image">
-                    <p>Foto da Pizza Quatro Queijos</p>
-                </div>
-                <h3>Pizza Quatro Queijos</h3>
-                <p>Molho de tomate especial, mussarela, gorgonzola, parmesão, catupiry e finalizada com azeitoas e orégano</p>
-                <div class="price">R$ --,--</div>
-            </div>
-                <div class="menu-item">
-                <div class="menu-item-image">
-                    <p>Foto da Pizza Calamussa</p>
-                </div>
-                <h3>Pizza Calamussa</h3>
-                <p>Molho de tomate especial, calabresa, mussarela, cebola e finalizada com azeitonas e orégano</p>
-                <div class="price">R$ --,--</div>
+                <div class="price">R$ 65,90</div>
             </div>
             
             <div class="menu-item">
@@ -899,7 +1089,41 @@
                 </div>
                 <h3>Pizza Pesto Empire</h3>
                 <p>Molho de tomate especial, mussarela, pimenta biquinho, molho pesto especial da casa e finalizada com azeitonas</p>
-                <div class="price">R$ --,--</div>
+                <div class="price">R$ 49,90</div>
+            </div>
+                        <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Marguerita</p>
+                </div>
+                <h3>Pizza Marguerita</h3>
+                <p>Molho de tomate especial, mussarela, tomates, manjericão fresco e finalizada com azeitonas e orégano</p>
+                <div class="price">R$ 45,90</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Calamussa</p>
+                </div>
+                <h3>Pizza Calamussa</h3>
+                <p>Molho de tomate especial, calabresa, mussarela, cebola e finalizada com azeitonas e orégano</p>
+                <div class="price">R$ 48,90</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Lombo</p>
+                </div>
+                <h3>Pizza Lombo</h3>
+                <p>Molho de tomate especial, mussarela, lombo, catupiry, cebola e finalizada com uma deliciosa geleia de pimenta, azeitonas e orégano</p>
+                <div class="price">R$ 52,90</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <p>Foto da Pizza Quatro Queijos</p>
+                </div>
+                <h3>Pizza Quatro Queijos</h3>
+                <p>Molho de tomate especial, mussarela, gorgonzola, parmesão, catupiry e finalizada com azeitoas e orégano</p>
+                <div class="price">R$ 55,90</div>
             </div>
         </div>
     </section>
@@ -994,18 +1218,24 @@
     </footer>
 
     <script>
-        // Create floating particles
+        // Optimized particle creation for mobile
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth > 768 ? 50 : 20;
+            const isMobile = window.innerWidth <= 768;
+            const particleCount = isMobile ? 0 : (window.innerWidth > 1200 ? 50 : 30);
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particlesContainer.appendChild(particle);
+            // Clear existing particles
+            particlesContainer.innerHTML = '';
+            
+            if (!isMobile) {
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 6 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particlesContainer.appendChild(particle);
+                }
             }
         }
 
@@ -1016,20 +1246,49 @@
         const mobileMenu = document.querySelector('.mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
 
-        mobileMenu.addEventListener('click', () => {
+        // Enhanced mobile menu handling
+        let isMenuOpen = false;
+        
+        mobileMenu.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             navMenu.classList.toggle('active');
+            isMenuOpen = !isMenuOpen;
+            
             const icon = mobileMenu.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
+            
+            // Prevent body scroll when menu is open
+            if (isMenuOpen) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !navMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
                 navMenu.classList.remove('active');
+                isMenuOpen = false;
                 const icon = mobileMenu.querySelector('i');
                 icon.classList.add('fa-bars');
                 icon.classList.remove('fa-times');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Enhanced mobile menu link handling
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                navMenu.classList.remove('active');
+                isMenuOpen = false;
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+                document.body.style.overflow = 'auto';
             });
         });
 
@@ -1188,3 +1447,4 @@
         });
     </script>
 </body>
+</html> 
